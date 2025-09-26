@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JTL-Wawi Cloud Connected Roadmap v2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .roadmap-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: #4a5568;
+        }
+
+        .cloud-connected {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .cloud-connected::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+            animation: underline-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { 
+                filter: brightness(1);
+                text-shadow: 0 0 15px rgba(102, 126, 234, 0.4);
+            }
+            50% { 
+                filter: brightness(1.2);
+                text-shadow: 0 0 25px rgba(102, 126, 234, 0.6);
+            }
+        }
+
+        @keyframes underline-glow {
+            0%, 100% { 
+                box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+            }
+            50% { 
+                box-shadow: 0 0 25px rgba(102, 126, 234, 0.8);
+            }
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #7f8c8d;
+        }
+
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #3498db, #e74c3c);
+            border-radius: 2px;
+        }
+
+        .milestone {
+            position: relative;
+            margin-bottom: 60px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .milestone:nth-child(odd) {
+            animation-delay: 0.2s;
+        }
+
+        .milestone:nth-child(even) {
+            animation-delay: 0.4s;
+        }
+
+        .milestone:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .milestone:nth-child(4) {
+            animation-delay: 0.8s;
+        }
+
+        .milestone:nth-child(5) {
+            animation-delay: 1s;
+        }
+
+        .milestone:nth-child(6) {
+            animation-delay: 1.2s;
+        }
+
+        .milestone:nth-child(7) {
+            animation-delay: 1.4s;
+        }
+
+        .milestone:nth-child(8) {
+            animation-delay: 1.6s;
+        }
+
+        .milestone-content {
+            width: 45%;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .milestone-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .milestone-content.expanded {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Special styling for JTL-Connect Release */
+        .milestone-release .milestone-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #8e44ad 100%);
+            color: white;
+            border-left: 8px solid #ffd700;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .milestone-release .milestone-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 70%, rgba(255, 215, 0, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .milestone-release .milestone-date,
+        .milestone-release .milestone-title,
+        .milestone-release .milestone-goal {
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .milestone-release .milestone-date {
+            color: #ffd700;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .milestone-release .milestone-title {
+            font-weight: 700;
+            font-size: 1.15em;
+        }
+
+        .milestone-release .event-badge {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #2c3e50;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .milestone-release .section-title {
+            color: #ffd700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .milestone-release .section-content {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .milestone-release .kpi-item {
+            background: rgba(255, 215, 0, 0.2);
+            border-left-color: #ffd700;
+        }
+
+        .milestone-release .kpi-label {
+            color: #ffd700;
+            font-weight: 700;
+        }
+
+        .milestone-release .kpi-value {
+            color: white;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+
+        .milestone-release .section-content li::before {
+            color: #ffd700;
+        }
+
+        .milestone-release .phase-indicator {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #2c3e50;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Special styling for SaaS Vision */
+        .milestone-saas .milestone-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #8e44ad 100%);
+            color: white;
+            border-left: 8px solid #f39c12;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .milestone-saas .milestone-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 177, 153, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .milestone-saas .milestone-content::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent, rgba(255, 215, 0, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: mega-shine 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(1deg); }
+            66% { transform: translateY(5px) rotate(-1deg); }
+        }
+
+        @keyframes mega-shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(50%) translateY(50%) rotate(45deg); }
+            100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+        }
+
+        .milestone-saas .milestone-date {
+            color: #f39c12;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+            font-size: 1.6em;
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+
+        .milestone-saas .milestone-title {
+            color: white;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+
+        .milestone-saas .milestone-goal {
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .milestone-saas .section-title {
+            color: #f39c12;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .milestone-saas .section-content {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .milestone-saas .section-content li::before {
+            color: #f39c12;
+            font-size: 1.2em;
+        }
+
+        .milestone-saas .kpi-item {
+            background: rgba(243, 156, 18, 0.2);
+            border-left-color: #f39c12;
+        }
+
+        .milestone-saas .kpi-label {
+            color: #f39c12;
+            font-weight: 700;
+        }
+
+        .milestone-saas .kpi-value {
+            color: white;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+
+        .milestone-saas .phase-indicator {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
+            font-size: 0.9em;
+            padding: 10px 15px;
+            animation: indicator-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { 
+                text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4), 0 0 20px rgba(243, 156, 18, 0.4);
+            }
+            50% { 
+                text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4), 0 0 30px rgba(243, 156, 18, 0.7);
+            }
+        }
+
+        @keyframes indicator-glow {
+            0%, 100% { 
+                box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
+            }
+            50% { 
+                box-shadow: 0 8px 30px rgba(243, 156, 18, 0.8), 0 0 40px rgba(243, 156, 18, 0.4);
+            }
+        }
+
+        .milestone:nth-child(odd) .milestone-content {
+            margin-left: 0;
+            border-left-color: #3498db;
+        }
+
+        .milestone:nth-child(even) .milestone-content {
+            margin-left: 55%;
+            border-left-color: #e74c3c;
+        }
+
+        .milestone-dot {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 4px solid;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .milestone:nth-child(odd) .milestone-dot {
+            border-color: #3498db;
+        }
+
+        .milestone:nth-child(even) .milestone-dot {
+            border-color: #e74c3c;
+        }
+
+        .milestone-header {
+            margin-bottom: 15px;
+        }
+
+        .milestone-date {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .milestone-title {
+            font-size: 1.1em;
+            color: #7f8c8d;
+            font-weight: 600;
+        }
+
+        .milestone-goal {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #34495e;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .expandable-sections {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .expandable-sections.expanded {
+            max-height: 1000px;
+            opacity: 1;
+            visibility: visible;
+            margin-top: 20px;
+        }
+
+        .use-cases, .content, .kpis {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            margin-right: 8px;
+            border-radius: 2px;
+        }
+
+        .use-cases .section-title::before {
+            background: #27ae60;
+        }
+
+        .content .section-title::before {
+            background: #f39c12;
+        }
+
+        .kpis .section-title::before {
+            background: #9b59b6;
+        }
+
+        .section-content {
+            font-size: 0.9em;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .section-content li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .kpi-item {
+            background: rgba(52, 152, 219, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #3498db;
+        }
+
+        .kpi-label {
+            font-weight: 600;
+            font-size: 0.8em;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        .kpi-value {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #3498db;
+        }
+
+        .event-badge {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .milestone-content {
+                width: calc(100% - 70px);
+                margin-left: 70px !important;
+            }
+
+            .milestone-dot {
+                left: 30px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .roadmap-container {
+                padding: 20px;
+            }
+
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .phase-indicator {
+            position: absolute;
+            right: -60px;
+            bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8em;
+            font-weight: 600;
+            transform: rotate(15deg);
+        }
+
+        .milestone:nth-child(even) .phase-indicator {
+            left: -60px;
+            right: auto;
+            transform: rotate(-15deg);
+        }
+
+        @media (max-width: 768px) {
+            .phase-indicator {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="roadmap-container">
+        <div class="header">
+            <h1>JTL-Wawi <span class="cloud-connected">Cloud Connected</span> Roadmap v2</h1>
+            <p>Strategische Entwicklung zum vollwertigen SaaS-ERP</p>
+        </div>
+
+        <div class="timeline">
+            <!-- Milestone 3: Q4 2025 -->
+            <div class="milestone">
+                <div class="milestone-dot"></div>
+                <div class="phase-indicator">CLOSED BETA</div>
+                <div class="milestone-content">
+                    <div class="milestone-header">
+                        <div class="milestone-date">Q4 2025</div>
+                        <div class="milestone-title">Milestone 3 · Closed Beta vorbereiten: Kernprozesse + Partner ready</div>
+                    </div>
+                    <div class="milestone-goal">
+                        Voraussetzungen schaffen, damit im Januar 2026 die Closed Beta starten kann. Händler nutzen grundlegende ERP-Funktionen in der Cloud. Partner sind eingebunden und vorbereitet.
+                    </div>
+                    
+                    <div class="event-badge" style="background: linear-gradient(45deg, #95a5a6, #7f8c8d);">Fokus: Funktionalität vor Design</div>
+                    <div class="event-badge" style="background: linear-gradient(45deg, #e67e22, #d35400);">kein Kunde ohne Partner</div>
+                    
+                    <div class="expandable-sections">
+                        <div class="use-cases">
+                            <div class="section-title">Use Cases – Händler</div>
+                            <div class="section-content">
+                                <ul>
+                                    <li>Artikelstammdaten pflegen (inkl. Varianten, Preise, Kategorien)</li>
+                                    <li>Kunden verwalten (Stammdaten, Adressen, Ansprechpartner, Bankverbindungen)</li>
+                                    <li>Aufträge erfassen bis zur Rechnungserstellung</li>
+                                    <li>Einfaches Onboarding: Händler können ihre bestehende Wawi in wenigen Schritten mit der Cloud verbinden</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <div class="section-title">Use Cases – Partner</div>
+                            <div class="section-content">
+                                <ul>
+                                    <li>Onboarding, Kommunikationskanäle aufbauen, Ideen & Anforderungen sammeln</li>
+                                    <li>Partner entscheiden, welche Kunden sie in die Closed Beta aufnehmen</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="kpis">
+                            <div class="section-title">KPIs</div>
+                            <div class="kpi-grid">
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Partner onboarded</div>
+                                    <div class="kpi-value">10+</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">ERP Studio Dialoge</div>
+                                    <div class="kpi-value">1 funktionsfähig</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Händler</div>
+                                    <div class="kpi-value">Partner-Kunden vorbereitet</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Milestone 4.1: Q1 2026 -->
+            <div class="milestone">
+                <div class="milestone-dot"></div>
+                <div class="phase-indicator">OPEN BETA</div>
+                <div class="milestone-content">
+                    <div class="milestone-header">
+                        <div class="milestone-date">Q1 2026</div>
+                        <div class="milestone-title">Milestone 4.1 · Open Beta mit App-Store vorbereiten</div>
+                    </div>
+                    <div class="event-badge">Partner Convention (Mai)</div>
+                    <div class="milestone-goal">
+                        Open Beta startet auf der Partner Convention im Mai. App Store geht live. Mindestens 10 Partner-Erweiterungen liefern spürbaren Kundennutzen.
+                    </div>
+                    
+                    <div class="expandable-sections">
+                        <div class="use-cases">
+                            <div class="section-title">Use Cases – Händler</div>
+                            <div class="section-content">
+                                <ul>
+                                    <li>Artikelpflege vollständig im Web: Variationskombinationen, Bilderverwaltung, Stammdaten</li>
+                                    <li>Auftragsabwicklung komplett: Angebot → Auftrag → Rechnungserstellung inkl. Korrektur, Storno, Teilrechnungen</li>
+                                    <li>Erste Amazon-Angebote über SCX pflegen</li>
+                                    <li>Erweiterungen aus dem App Store nutzen</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <div class="section-title">Use Cases – Partner</div>
+                            <div class="section-content">
+                                <ul>
+                                    <li>Erste Apps für ERP Cloud im App Store veröffentlichen und mit Kunden testen</li>
+                                    <li>Erhalten frühzeitig stabile APIs, um Erweiterungen für Händler-Mehrwert entwickeln zu können</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="kpis">
+                            <div class="section-title">KPIs</div>
+                            <div class="kpi-grid">
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Daily Active Users</div>
+                                    <div class="kpi-value">5</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Weekly Active Users</div>
+                                    <div class="kpi-value">10-15</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Daily Used Apps/User</div>
+                                    <div class="kpi-value">&lt;1</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Weekly Used Apps/User</div>
+                                    <div class="kpi-value">2</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Milestone 4.2: Q2 2026 -->
+            <div class="milestone">
+                <div class="milestone-dot"></div>
+                <div class="phase-indicator">SCALE-UP</div>
+                <div class="milestone-content">
+                    <div class="milestone-header">
+                        <div class="milestone-date">Q2 2026</div>
+                        <div class="milestone-title">Milestone 4.2 · Open Beta: Scale-Up: Apps & Kundenwachstum</div>
+                    </div>
+                    <div class="milestone-goal">
+                        Händler arbeiten produktiv mit Cloud Connected. Partner-Ökosystem wächst sichtbar.
+                    </div>
+                    
+                    <div class="expandable-sections">
+                        <div class="use-cases">
+                            <div class="section-title">Use Cases – Händler</div>
+                            <div class="section-content">
+                                <ul>
+                                    <li>Artikel, Kunden, Aufträge und Rechnungen vollständig im Web</li>
+                                    <li>Auslieferungen & Retouren im Web</li>
+                                    <li>Reports und Dashboards nutzen</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <div class="section-title">Use Cases – Partner</div>
+                            <div class="section-content">
+                                <ul>
+                                    <li>Apps veröffentlichen & vertreiben, Mehrwert demonstrieren</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="kpis">
+                            <div class="section-title">KPIs</div>
+                            <div class="kpi-grid">
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Daily Active Users</div>
+                                    <div class="kpi-value">40</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Weekly Active Users</div>
+                                    <div class="kpi-value">80</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Daily Used Apps/User</div>
+                                    <div class="kpi-value">1</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Weekly Used Apps/User</div>
+                                    <div class="kpi-value">3</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Churn Rate</div>
+                                    <div class="kpi-value">10-12%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Milestone 5: Q3 2026 -->
+            <div class="milestone milestone-release">
+                <div class="milestone-dot"></div>
+                <div class="phase-indicator">🚀 JTL-CONNECT</div>
+                <div class="milestone-content">
+                    <div class="milestone-header">
+                        <div class="milestone-date">Q3 2026</div>
+                        <div class="milestone-title">Milestone 5 · Release auf der JTL-Connect: Amazon voll im Web & Einkauf (Phase 1)</div>
+                    </div>
+                    <div class="event-badge">JTL-Connect (Oktober)</div>
+                    <div class="milestone-goal">
+                        Offizielles Release auf der JTL-Connect. Amazon vollständig ins Web ERP integriert. Händler können ihren Einkauf erstmals direkt im Web steuern – mit Bestellvorschlägen und Einkaufslisten.
+                    </div>
+                    
+                    <div class="expandable-sections">
+                        <div class="use-cases">
+                            <div class="section-title">Use Cases – Händler</div>
+                            <div class="section-content">
+                                <ul>
+                                    <li>Amazon-Angebote und Artikeldaten vollständig im Web pflegen</li>
+                                    <li>Einkauf Phase 1: Bestellvorschläge erstellen, Einkaufslisten pflegen</li>
+                                    <li>Flüssiges Arbeiten ohne Performanceprobleme</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <div class="section-title">Use Cases – Partner</div>
+                            <div class="section-content">
+                                <ul>
+                                    <li>Endpunkte für Amazon und Einkauf stehen bereit</li>
+                                    <li>Fokus liegt darauf, Kundennutzen über unsere Partner zu schaffen</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="kpis">
+                            <div class="section-title">KPIs</div>
+                            <div class="kpi-grid">
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Daily Active Users</div>
+                                    <div class="kpi-value">80</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Weekly Active Users</div>
+                                    <div class="kpi-value">120</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Daily Used Apps/User</div>
+                                    <div class="kpi-value">2</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Weekly Used Apps/User</div>
+                                    <div class="kpi-value">4</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Churn Rate</div>
+                                    <div class="kpi-value">&lt;10%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Milestone 7: Q4 2026 -->
+            <div class="milestone">
+                <div class="milestone-dot"></div>
+                <div class="phase-indicator">BREAKTHROUGH</div>
+                <div class="milestone-content">
+                    <div class="milestone-header">
+                        <div class="milestone-date">Q4 2026</div>
+                        <div class="milestone-title">Milestone 6 · Customer Breakthrough: Einkauf (Phase 2) & eBay erobern</div>
+                    </div>
+                    <div class="milestone-goal">
+                        Durchbruch bei Kundennutzung: verstärkter Fokus auf aktive Nutzung. Einkaufsprozesse im Web vollständig abbildbar. eBay-Integration über SCX.
+                    </div>
+                    
+                    <div class="expandable-sections">
+                        <div class="use-cases">
+                            <div class="section-title">Use Cases – Händler</div>
+                            <div class="section-content">
+                                <ul>
+                                    <li>Lieferantenbestellungen und Preisanfragen im Web</li>
+                                    <li>Eingangsrechnungen verwalten und abgleichen</li>
+                                    <li>eBay-Angebote im Web managen</li>
+                                    <li>Apps nutzen, die echte Alltagserleichterung bringen</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <div class="section-title">Use Cases – Partner</div>
+                            <div class="section-content">
+                                <ul>
+                                    <li>Erweiterungen für Einkauf & Marktplätze entwickeln</li>
+                                    <li>Kundenfeedback aufnehmen und in Innovationen umsetzen</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="kpis">
+                            <div class="section-title">KPIs</div>
+                            <div class="kpi-grid">
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Daily Active Users</div>
+                                    <div class="kpi-value">300</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Weekly Active Users</div>
+                                    <div class="kpi-value">600</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Daily Used Apps/User</div>
+                                    <div class="kpi-value">3</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Weekly Used Apps/User</div>
+                                    <div class="kpi-value">6</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Churn Rate</div>
+                                    <div class="kpi-value">&lt;8%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Milestone 8: 2027 ff. -->
+            <div class="milestone milestone-saas">
+                <div class="milestone-dot"></div>
+                <div class="phase-indicator">🌟 SAAS VISION</div>
+                <div class="milestone-content">
+                    <div class="milestone-header">
+                        <div class="milestone-date">2027 ff.</div>
+                        <div class="milestone-title">Rebranding zu JTL ERP Cloud (SaaS-Vollumfang)</div>
+                    </div>
+                    <div class="milestone-goal">
+                        Rebranding zu JTL ERP Cloud. Vollständiges SaaS-ERP, 100% Funktionen im Browser.
+                    </div>
+                    
+                    <div class="expandable-sections">
+                        <div class="use-cases">
+                            <div class="section-title">Use Cases – Händler</div>
+                            <div class="section-content">
+                                <ul>
+                                    <li>Alle Module (Wawi, Einkauf, Logistik, Buchhaltung, Reporting) in der Cloud</li>
+                                    <li>Keine eigene IT-Infrastruktur mehr nötig</li>
+                                    <li>Migration von bestehenden Installationen</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <div class="section-title">Use Cases – Partner</div>
+                            <div class="section-content">
+                                <ul>
+                                    <li>Erweitern kontinuierlich das App-Ökosystem und treiben Innovationen entlang der Kundenbedürfnisse voran</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="kpis">
+                            <div class="section-title">KPIs</div>
+                            <div class="kpi-grid">
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Aktive Kunden 2027</div>
+                                    <div class="kpi-value">1000</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Full SaaS 2028</div>
+                                    <div class="kpi-value">2000</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Partner</div>
+                                    <div class="kpi-value">Wachsendes App-Ökosystem</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-label">Churn Rate</div>
+                                    <div class="kpi-value">&lt;6%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Interaktivität für bessere UX
+        function toggleDetails(milestoneContent) {
+            const expandableSections = milestoneContent.querySelector('.expandable-sections');
+            const isExpanded = expandableSections.classList.contains('expanded');
+            
+            if (isExpanded) {
+                expandableSections.classList.remove('expanded');
+                milestoneContent.classList.remove('expanded');
+            } else {
+                expandableSections.classList.add('expanded');
+                milestoneContent.classList.add('expanded');
+            }
+        }
+
+        document.querySelectorAll('.milestone-content').forEach(content => {
+            content.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleDetails(this);
+            });
+        });
+
+        // Smooth scroll Animation bei Page Load
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>
